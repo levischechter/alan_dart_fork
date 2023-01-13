@@ -8,6 +8,8 @@
 [![](https://img.shields.io/badge/compatible-flutter-blue)](https://flutter.dev)
 [![GitHub](https://img.shields.io/github/license/alan-sdk/alan.dart)](https://github.com/alan-sdk/alan.dart/blob/main/LICENSE)
 
+this is a fork from https://github.com/alan-sdk/alan.dart to enable web-grpc
+
 Alan.dart is a pure Dart package allowing you to easily integrate your Dart-based project with any [Cosmos](https://cosmos.network)-based blockchain.  
 
 You can find the documentation on the [official website](https://alan-sdk.github.io/alan.dart/). 
@@ -25,18 +27,8 @@ To start using this library inside your project, just edit your `pubspec.yml` fi
 
 ```yaml
 dependencies:
-  alan: <version>
-```
-
-The latest available version is:  
-![Pub Version](https://img.shields.io/pub/v/alan)
-
-You can even use a specific GitHub tag or branch if you want: 
-
-```yaml
-dependencies:
   alan:
     git:
-      url: git://github.com/alan-sdk/alan.dart.git
+      url: git://github.com/levischechter/alan_dart_fork.git
       ref: <branch or tag>
 ```
