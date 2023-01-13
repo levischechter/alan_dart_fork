@@ -1,0 +1,4 @@
+.dart_tool/*
+build/*
+analysis_options.yaml
+package*.json
