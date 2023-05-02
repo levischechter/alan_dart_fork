@@ -12,7 +12,8 @@ class TxSender {
 
   /// Builds a new [TxSender] given a [ClientChannel].
   factory TxSender.build(GrpcOrGrpcWebClientChannel channel) {
-    return TxSender(client: tx.ServiceClient(channel));
+    ClientChannel cc = channel as ClientChannel; 
+    return TxSender(client: tx.ServiceClient(cc));
   }
 
   /// Builds a new [TxSender] from the given [NetworkInfo].
