@@ -47,13 +47,14 @@ class GRPCInfo extends Equatable {
 
   /// Creates a new [ClientChannel] using the optional given options.
   GrpcOrGrpcWebClientChannel getChannel() {
+    int webPort = 9091;
     return GrpcOrGrpcWebClientChannel.toSeparateEndpoints(
       grpcHost: host, 
       grpcPort: port, 
       grpcTransportSecure: credentials == ChannelCredentials.secure(), 
       grpcWebHost: host, 
-      grpcWebPort: 443, 
-      grpcWebTransportSecure: true);
+      grpcWebPort: webPort, 
+      grpcWebTransportSecure: webPort == 443);
   }
 
   factory GRPCInfo.fromJson(Map<String, dynamic> json) {
