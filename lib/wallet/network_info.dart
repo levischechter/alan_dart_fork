@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:grpc/grpc.dart';
-import 'package:grpc/src/client/channel.dart' as channel;
+import 'package:grpc/grpc_connection_interface.dart' as channel;
+import 'package:grpc/grpc_or_grpcweb.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'network_info.g.dart';
@@ -45,12 +46,14 @@ class GRPCInfo extends Equatable {
   });
 
   /// Creates a new [ClientChannel] using the optional given options.
-  channel.ClientChannelBase getChannel() {
-    return ClientChannel(
-      host.replaceFirst(RegExp('http(s)?:\/\/'), ''),
-      port: port,
-      options: ChannelOptions(credentials: credentials),
-    );
+  GrpcOrGrpcWebClientChannel getChannel() {
+    return GrpcOrGrpcWebClientChannel.toSeparateEndpoints(
+      grpcHost: host, 
+      grpcPort: port, 
+      grpcTransportSecure: credentials == ChannelCredentials.secure(), 
+      grpcWebHost: host, 
+      grpcWebPort: 443, 
+      grpcWebTransportSecure: true);
   }
 
   factory GRPCInfo.fromJson(Map<String, dynamic> json) {
@@ -164,7 +167,7 @@ class NetworkInfo extends Equatable {
 
   /// Returns the ClientChannel that should be used to connect
   /// to the gRPC endpoint.
-  channel.ClientChannelBase get gRPCChannel {
+  GrpcOrGrpcWebClientChannel get gRPCChannel {
     return grpcInfo.getChannel();
   }
 
