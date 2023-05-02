@@ -48,8 +48,8 @@ class GRPCInfo extends Equatable {
 
   /// Creates a new [ClientChannel] using the optional given options.
   GrpcWebClientChannel getChannel() {
-    int webPort = 9091;
-    return GrpcWebClientChannel.xhr(Uri.parse("http://${host}:${webPort}"));
+    int webPort = 443;
+    return GrpcWebClientChannel.xhr(Uri.parse("https://${host}:${webPort}"));
   //   return GrpcWebClientChannel.toSeparateEndpoints(
   //     grpcHost: host, 
   //     grpcPort: port, 
