@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_connection_interface.dart' as channel;
 import 'package:grpc/grpc_or_grpcweb.dart';
-import 'package:grpc/grpc_web.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'network_info.g.dart';

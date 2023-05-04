@@ -2,7 +2,6 @@ import 'package:alan/alan.dart';
 import 'package:alan/proto/cosmos/tx/v1beta1/export.dart' as tx;
 import 'package:grpc/src/client/channel.dart' as CC;
 import 'package:grpc/grpc_or_grpcweb.dart';
-import 'package:grpc/grpc_web.dart';
 
 /// Allows to easily send a [StdTx] using the data contained inside the
 /// specified [Wallet].
