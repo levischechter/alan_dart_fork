@@ -12,7 +12,7 @@ class TxSender {
   TxSender({required tx.ServiceClient client}) : _client = client;
 
   /// Builds a new [TxSender] given a [ClientChannel].
-  factory TxSender.build(GrpcWebClientChannel channel) {
+  factory TxSender.build(GrpcOrGrpcWebClientChannel channel) {
     CC.ClientChannel cc = channel as CC.ClientChannel; 
     return TxSender(client: tx.ServiceClient(cc));
   }

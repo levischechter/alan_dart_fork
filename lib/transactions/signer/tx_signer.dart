@@ -22,7 +22,7 @@ class TxSigner {
 
   /// Builds a new [TxSigner] from a given gRPC client channel and HTTP client.
   factory TxSigner.build(
-    GrpcWebClientChannel clientChannel,
+    GrpcOrGrpcWebClientChannel clientChannel,
     http.Client httpClient,
   ) {
     CC.ClientChannel cc = clientChannel as CC.ClientChannel;
