@@ -27,6 +27,9 @@ ChannelCredentials channelOptionsFromJson(String value) {
 class GRPCInfo extends Equatable {
   @JsonKey(name: 'host', required: true)
   final String host;
+  final String? webHost;
+  final int webPort;
+  final bool webTransportSecure;
 
   @JsonKey(name: 'port', defaultValue: 9090)
   final int port;
@@ -42,19 +45,20 @@ class GRPCInfo extends Equatable {
     required this.host,
     this.port = 9090,
     this.credentials = const ChannelCredentials.insecure(),
+    this.webHost,
+    this.webPort = 443,
+    this.webTransportSecure = true
   });
 
   /// Creates a new [ClientChannel] using the optional given options.
   GrpcOrGrpcWebClientChannel getChannel() {
-    int webPort = 443;
-    // return GrpcWebClientChannel.xhr(Uri.parse("https://${host}:${webPort}"));
     return GrpcOrGrpcWebClientChannel.toSeparateEndpoints(
       grpcHost: host, 
       grpcPort: port, 
       grpcTransportSecure: credentials == ChannelCredentials.secure(), 
-      grpcWebHost: host, 
+      grpcWebHost: webHost ?? host, 
       grpcWebPort: webPort, 
-      grpcWebTransportSecure: webPort == 443);
+      grpcWebTransportSecure: webTransportSecure);
   }
 
   factory GRPCInfo.fromJson(Map<String, dynamic> json) {
@@ -71,6 +75,9 @@ class GRPCInfo extends Equatable {
       host,
       port,
       credentials.isSecure,
+      webHost,
+      webPort,
+      webTransportSecure
     ];
   }
 
