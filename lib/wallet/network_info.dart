@@ -27,8 +27,14 @@ ChannelCredentials channelOptionsFromJson(String value) {
 class GRPCInfo extends Equatable {
   @JsonKey(name: 'host', required: true)
   final String host;
+
+  @JsonKey(name: 'webHost', required: false)
   final String? webHost;
+
+  @JsonKey(name: 'webPort', defaultValue: 443)
   final int webPort;
+
+  @JsonKey(name: 'webTransportSecure', defaultValue: true)
   final bool webTransportSecure;
 
   @JsonKey(name: 'port', defaultValue: 9090)
@@ -52,11 +58,12 @@ class GRPCInfo extends Equatable {
 
   /// Creates a new [ClientChannel] using the optional given options.
   GrpcOrGrpcWebClientChannel getChannel() {
+    String finaleWebHost = webHost ?? host;
     return GrpcOrGrpcWebClientChannel.toSeparateEndpoints(
-      grpcHost: host, 
+      grpcHost: host.replaceFirst(RegExp('http(s)?:\/\/'), ''), 
       grpcPort: port, 
       grpcTransportSecure: credentials == ChannelCredentials.secure(), 
-      grpcWebHost: webHost ?? host, 
+      grpcWebHost: finaleWebHost.replaceFirst(RegExp('http(s)?:\/\/'), ''), 
       grpcWebPort: webPort, 
       grpcWebTransportSecure: webTransportSecure);
   }
